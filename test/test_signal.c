@@ -25,9 +25,11 @@ void calc_task(void *vargs)
 {
     struct task_args *args = (struct task_args *)vargs;
     while(1) {
+        // Make this a one shot task
         signal_handle_calculation(args->request,
                                   args->response,
                                   args->data);
+                                  
     }
     vTaskDelete(NULL);
 }
