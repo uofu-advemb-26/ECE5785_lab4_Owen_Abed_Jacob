@@ -123,13 +123,34 @@ void runner_thread (__unused void *args)
     }
 }
 
-int main (void)
+
+
+
+
+int main(void)
 {
     stdio_init_all();
+
     printf("Launching runner\n");
+
     hard_assert(cyw43_arch_init() == PICO_OK);
-    xTaskCreate(runner_thread, "TestRunner",
-                TEST_RUNNER_STACK_SIZE, NULL, TEST_RUNNER_PRIORITY, NULL);
+
+    BaseType_t result = xTaskCreate(
+        runner_thread,
+        "TestRunner",
+        TEST_RUNNER_STACK_SIZE,
+        NULL,
+        TEST_RUNNER_PRIORITY,
+        NULL
+    );
+
+    if (result != pdPASS) {
+        printf("ERROR: Failed to create test runner\n");
+        fflush(stdout);
+        return 1;
+    }
+
     vTaskStartScheduler();
-	return 0;
+
+    return 0;
 }

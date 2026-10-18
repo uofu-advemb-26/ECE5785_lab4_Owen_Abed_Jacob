@@ -6,3 +6,7 @@ log
 *-asciinema
 *.pid
 *-profile
+
+
+build-ninja/
+build_error.txt
