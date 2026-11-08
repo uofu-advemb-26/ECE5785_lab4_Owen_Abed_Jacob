@@ -127,7 +127,7 @@ void runner_thread (__unused void *args)
         setup_pool = 0;
         RUN_TEST(test_all_alone);
         UNITY_END();
-        sleep_ms(10000);
+        sleep_ms(1000);
     }
 }
 
